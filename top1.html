@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FarmGuide - Your Farming Companion</title>
+    <link rel="stylesheet" href="navigation.css">
+    <link rel="stylesheet" href="top1.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Include Navigation -->
+    <div id="navigation-placeholder"></div>
+    
+    <main>
+        <div id="homeplant_img">
+            <img src="C:\Users\anush\Downloads\plant.jpg" alt="Plant Image">
+        </div>
+        <div id="home_farming">
+            <h1>Your Farming Companion!</h1>
+            <p>
+                Farming is not merely a profession. It's a way of life.
+                A legacy passed down through generations. It's a journey of hard work, dedication, and an unbreakable connection with the land.
+                Our farmers are the unsung heroes of our nation, feeding not just our stomachs, but our hopes and dreams as well. Agriculture 
+                is the backbone of our country's economy. It is the main traditional occupation of our country. India produces both Kharif
+                and Rabi crops.
+            </p>
+        </div>
+        <div id="home_about">
+            <h1>About us...</h1>
+            <p>
+                We are passionate farmers and agriculturists with the tools, knowledge, and resources they need to thrive in an ever-evolving
+                industry. Our journey began with a simple yet powerful vision - to bridge the gap between traditional farming practices and 
+                cutting-edge technology. We understand the importance of agriculture in our lives, and we're committed to providing solutions 
+                that make farming more efficient, sustainable, and rewarding.
+            </p>
+        </div>
+        <div id="home_imgs">
+            <div id="home_season">
+                <a href="season.html">
+                    <img src="C:\Users\anush\Downloads\season.jpeg" alt="Season Image">
+                </a>
+                <h1>Season Wise</h1>
+            </div>
+            <div id="home_soil">
+                <a href="soil.html">
+                    <img src="C:\Users\anush\Downloads\soil type.jpeg" alt="Soil Type Image">
+                </a>
+                <h1>Soil Type</h1>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal functions - define them immediately -->
+    <script>
+        // Global modal functions
+        function openLoginModal() {
+            const loginModal = document.getElementById('loginModal');
+            if (loginModal) {
+                loginModal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            } else {
+                window.location.href = 'login.html';
+            }
+        }
+
+        function closeLoginModal() {
+            const loginModal = document.getElementById('loginModal');
+            if (loginModal) {
+                loginModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        function handleLogin(event) {
+            event.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            const remember = document.getElementById('rememberMe').checked;
+            console.log('Login attempt:', { email, password, remember });
+            alert('Login functionality will be implemented here!');
+            closeLoginModal();
+        }
+
+        // Close modals when clicking outside
+        window.onclick = function(event) {
+            const loginModal = document.getElementById('loginModal');
+            if (event.target === loginModal) {
+                closeLoginModal();
+            }
+        }
+    </script>
+
+    <script>
+        // Load navigation
+        fetch('navigation.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('navigation-placeholder').innerHTML = data;
+                // Load navigation CSS
+                const navCSS = document.createElement('link');
+                navCSS.rel = 'stylesheet';
+                navCSS.href = 'navigation.css';
+                document.head.appendChild(navCSS);
+                // Load navigation JS
+                const navJS = document.createElement('script');
+                navJS.src = 'navigation.js';
+                document.body.appendChild(navJS);
+            })
+            .catch(error => {
+                console.error('Error loading navigation:', error);
+                // Fallback navigation with login modal only
+                document.getElementById('navigation-placeholder').innerHTML = `
+                    <nav class="main-nav">
+                        <div class="nav-container">
+                            <div class="nav-brand">
+                                <a href="top1.html" class="brand-link">
+                                    <i class="fas fa-seedling"></i>
+                                    <span>FarmGuide</span>
+                                </a>
+                            </div>
+                            <div class="nav-menu">
+                                <a href="top1.html" class="nav-link active">Home</a>
+                                <a href="crop1.html" class="nav-link">Crop Guide</a>
+                                <a href="shop.html" class="nav-link">Purchase</a>
+                                <a href="weather.html" class="nav-link">Weather</a>
+                                <a href="agriculturelist.html" class="nav-link">Agricultureists</a>
+                            </div>
+                            <div class="nav-auth">
+                                <button class="auth-btn" onclick="openLoginModal()">Login</button>
+                            </div>
+                        </div>
+                    </nav>
+
+                    <!-- Login Modal -->
+                    <div id="loginModal" class="modal">
+                        <div class="modal-content">
+                            <span class="close" onclick="closeLoginModal()">&times;</span>
+                            <div class="auth-container">
+                                <h2><i class="fas fa-sign-in-alt"></i> Login</h2>
+                                <form id="loginForm" onsubmit="handleLogin(event)">
+                                    <div class="form-group">
+                                        <label for="loginEmail">Email</label>
+                                        <input type="email" id="loginEmail" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="loginPassword">Password</label>
+                                        <input type="password" id="loginPassword" required>
+                                    </div>
+                                    <div class="form-group checkbox-group">
+                                        <input type="checkbox" id="rememberMe">
+                                        <label for="rememberMe">Remember me</label>
+                                    </div>
+                                    <button type="submit" class="auth-submit-btn">Login</button>
+                                </form>
+                                <div class="auth-footer">
+                                    <p>Don't have an account? <a href="signup.html">Sign up here</a></p>
+                                    <a href="#" class="forgot-password">Forgot Password?</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Success/Error Messages -->
+                    <div id="messageContainer" class="message-container"></div>
+                `;
+            });
+    </script>
+</body>
+</html>
